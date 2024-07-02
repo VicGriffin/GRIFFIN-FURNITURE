@@ -1,0 +1,36 @@
+.header{
+    background-color: #936e47;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* height: 10vh; */
+}
+.header__logo img{
+    width: 3.4rem;
+    border-radius: 50%;
+    margin-left: .5rem;
+}
+.navigation ul{
+    display: flex;
+    list-style: none;
+    gap:6rem;
+    justify-self: center;
+}
+.navigation li a {
+    text-decoration: none;
+    display: flex;
+    justify-content: space-between;
+    padding: 2.5px 5px;
+    color: white;
+    background-color: black; 
+    backdrop-filter: blur(2px); 
+    -webkit-backdrop-filter: blur(2px); 
+    box-shadow: 0 0 5px 2.5px black;
+}
+
+.header-icon img{
+    width: 1.6rem;
+    margin-right: 3rem;
+}
+
+
