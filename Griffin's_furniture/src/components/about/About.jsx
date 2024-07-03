@@ -41,8 +41,8 @@ function About() {
               </PieChart>
             </ResponsiveContainer>
             <div className="pie-text">
-              <span>+110m</span>
-              <p>customers all over the world</p>
+              <span>+110m buyers</span>
+              <p> all over the world</p>
             </div>
           </div>
         </div>
