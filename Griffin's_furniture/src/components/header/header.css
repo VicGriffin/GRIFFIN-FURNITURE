@@ -1,72 +1,74 @@
-.header{
+.header {
     background-color: #936e47;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 2rem;
 }
-.header__logo img{
+
+.header__logo img {
     width: 3.4rem;
     border-radius: 50%;
-    margin-left: .5rem;
+    margin-left: 0.5rem;
 }
-nav li{
+
+nav li {
     list-style: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
-.shift-button{
-    padding: 5px;
+
+nav ul {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+nav a {
+    text-decoration: none;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    text-transform: capitalize;
+    background-color: black;
+    backdrop-filter: blur(2px);
+    box-shadow: 0 0 5px 2.5px black;
+    transition: color 0.3s, background-color 0.3s;
+}
+
+nav a:hover {
+    color: black;
+    background-color: #fff;
+}
+
+.shift-button {
+    padding: 0.5rem;
     cursor: pointer;
     background: transparent;
     border: none;
     outline: none;
-    font-size: 1.3rem;
-}
- nav a{
-    margin: 0 2rem;
-    text-decoration: none;
-    color: #fff;
-    padding: 2.5px 5px;
-    text-transform: capitalize;
-    background-color: black; 
-    backdrop-filter: blur(2px); 
-    -webkit-backdrop-filter: blur(2px); 
-    box-shadow: 0 0 5px 2.5px black;
+    font-size: 1.5rem;
 }
 
-nav a:hover{
-    color: black;
-    background-color: #fff;
-}
-.header .nav-btn{
-    padding: 5px;
+.header .nav-btn {
+    padding: 0.5rem;
     cursor: pointer;
     background: transparent;
     border: none;
     outline: none;
     visibility: hidden;
     opacity: 0;
-    font-size: 1.8rem;
+    font-size: 2rem;
+}
 
+.header-icon button {
+    margin-right: 1rem;
 }
-.header nav ul{
-    display: flex;
-    justify-content: space-between;
-    
 
-}
-.header-icon button{
-    width: 1.6rem;
-    margin-right: 3rem;
-}
-@media screen and (max-width:1024px){
-    .header .nav-btn{
+@media screen and (max-width: 1024px) {
+    .header .nav-btn {
         visibility: visible;
         opacity: 1;
-    }       
-    .header nav{
+    }
+
+    .header nav {
         position: fixed;
         top: 0;
         left: 0;
@@ -77,18 +79,26 @@ nav a:hover{
         justify-content: center;
         flex-direction: column;
         background-color: #936e47;
-        gap: 1.5rem;
-        transition: 1s;
-        transform: translate(-100vh);
+        transition: transform 0.3s ease-in-out;
+        transform: translateY(-100%);
     }
-    .header .responsive-nav{
-        transform: none;
+
+    .header .responsive-nav {
+        transform: translateY(0);
     }
-    nav .nav-close-btn{
+
+    nav .nav-close-btn {
         position: absolute;
         top: 2rem;
         right: 2rem;
     }
-    
-}
 
+    nav ul {
+        flex-direction: column;
+        gap: 3rem;
+    }
+
+    nav li {
+        margin: 0;
+    }
+}

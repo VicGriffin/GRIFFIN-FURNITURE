@@ -1,0 +1,90 @@
+.about {
+  background-color: black;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+}
+
+.heading {
+  margin-top: 20vh;
+  text-align: center;
+  font-size: 2rem;
+  text-transform: capitalize;
+}
+
+.about h1 {
+  text-align: center;
+  font-size: 2rem;
+  text-transform: capitalize;
+}
+
+.about h2 {
+  margin-top: 2rem;
+  color: #936e47;
+  text-align: center;
+  font-size: 1.5rem;
+  text-transform: capitalize;
+}
+
+.about h3 {
+  text-align: center;
+  font-size: 1.3rem;
+  text-transform: capitalize;
+  color: white;
+}
+
+.about-description {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+}
+
+.explanation {
+  max-width: 600px;
+  text-align: center;
+  line-height: 1.6rem;
+}
+
+.explanation p {
+  margin-top: 1.2rem;
+}
+
+.pie {
+  width: 90%;
+  max-width: 1000px;
+  background-color: #936e47;
+  border-radius: 10px;
+}
+
+.pie-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pie h3 {
+  text-align: center;
+  margin-bottom: 1rem;
+  color: rgb(0, 0, 0);
+}
+
+.pie-text {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.pie-text span {
+    color: black;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.pie-text p {
+  margin: 0;
+  font-size: 1.2rem;
+  color: black;
+}

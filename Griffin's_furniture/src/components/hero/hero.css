@@ -103,3 +103,6 @@
 .thumbnail .content .description {
     font-size: 0.9rem;
 }
+@media screen and (max-width:800px) {
+        
+}
