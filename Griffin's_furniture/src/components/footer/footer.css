@@ -1,0 +1,43 @@
+footer{
+    background-color: #936e47;
+    display: flex;
+    flex:2 2 2;
+}
+footer .footer-left{
+    flex: 2;
+}
+footer .footer-middle{
+    flex: 2;
+}
+footer .footer-right{
+    flex: 2;
+}
+.footer-left{
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    text-align: center;
+}
+.footer-left a{
+    color: #fff;
+    font-size: 1.2em;
+    font-weight: 100;
+}
+.footer-middle{
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+.footer-middle a{
+    color: #fff;
+    font-size: 1.2em;
+    font-weight: 100;
+}
+.footer-right{
+    text-align: center;
+    
+}
+.footer-right input{
+    padding: 5px 10px;
+    border-radius: 10px;
+}

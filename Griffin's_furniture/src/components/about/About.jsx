@@ -19,7 +19,7 @@ function About() {
         <div className="explanation">
           <h1>Griffins</h1>
           <h2>Furnitures</h2>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque voluptatibus, provident nobis modi ipsam nemo quos inventore ab, consequatur impedit eligendi tempora ipsum. Nemo neque impedit laboriosam ipsum dignissimos quam porro? Consectetur placeat, aperiam suscipit voluptatum doloremque commodi odio rem veritatis officia corporis autem laboriosam tempora iste. Et, magnam dolorem.</p>
+          <p>Griffins Furniture is a renowned furniture shop known for its premium quality and stylish furniture offerings. Located in Nairobi, Kenya, Griffins Furniture stands out for its wide range of products, including sofas, beds, tables, and home decor items that cater to diverse tastes and preferences. With a commitment to craftsmanship and customer satisfaction, Griffins Furniture has built a strong reputation for reliability, excellence in design, and attentive service. Whether furnishing a modern apartment or a classic home, Griffins Furniture is a go-to destination for customers seeking timeless pieces that blend functionality with aesthetic appeal.</p>
         </div>
         <div className="pie">
           <h3>Customers According to Location</h3>
