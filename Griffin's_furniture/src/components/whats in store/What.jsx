@@ -23,8 +23,6 @@ function What() {
     const listREACT = listRef.current;
     const seeMoreButtons = seeMoreButtonsRef.current;
 
-    let unAcceptClick;
-
     const showSlider = (type) => {
       nextButton.style.pointerEvents = 'none';
       prevButton.style.pointerEvents = 'none';
@@ -39,8 +37,7 @@ function What() {
         listREACT.prepend(items[positionLast]);
         carousel.classList.add('prev');
       }
-      clearTimeout(unAcceptClick);
-      unAcceptClick = setTimeout(() => {
+      setTimeout(() => {
         nextButton.style.pointerEvents = 'auto';
         prevButton.style.pointerEvents = 'auto';
       }, 2000);
@@ -252,7 +249,7 @@ function What() {
         </div>
       </section>
     </>
-  )
+  );
 }
 
 export default What;
