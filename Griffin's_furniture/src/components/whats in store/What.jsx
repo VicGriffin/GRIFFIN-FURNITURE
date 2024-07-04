@@ -23,6 +23,11 @@ function What() {
     const listREACT = listRef.current;
     const seeMoreButtons = seeMoreButtonsRef.current;
 
+    if (!nextButton || !prevButton || !backButton || !carousel || !listREACT || seeMoreButtons.length === 0) {
+      console.error('One or more elements are not found');
+      return;
+    }
+
     const showSlider = (type) => {
       nextButton.style.pointerEvents = 'none';
       prevButton.style.pointerEvents = 'none';
@@ -47,9 +52,11 @@ function What() {
     prevButton.onclick = () => showSlider('prev');
 
     seeMoreButtons.forEach(button => {
-      button.onclick = () => {
-        carousel.classList.add('showDetail');
-      };
+      if (button) {
+        button.onclick = () => {
+          carousel.classList.add('showDetail');
+        };
+      }
     });
 
     backButton.onclick = () => {
@@ -58,197 +65,74 @@ function What() {
 
     // Cleanup event listeners on unmount
     return () => {
-      nextButton.onclick = null;
-      prevButton.onclick = null;
-      backButton.onclick = null;
+      if (nextButton) nextButton.onclick = null;
+      if (prevButton) prevButton.onclick = null;
+      if (backButton) backButton.onclick = null;
       seeMoreButtons.forEach(button => {
-        button.onclick = null;
+        if (button) button.onclick = null;
       });
     };
   }, []);
 
   return (
-    <>
-      <section className="whats-in-store">
-        <div className="heading">
-          What's in store
-          <button className='btn'><PiArrowBendRightDownFill /></button>
+    <section className="whats-in-store">
+      <div className="heading">
+        What's in store
+        <button className='btn'><PiArrowBendRightDownFill /></button>
+      </div>
+      <div className="carousel" ref={carouselRef}>
+        <div className="list" ref={listRef}>
+          {[Chair1, Chair2, Chair3, Chair4].map((chair, index) => (
+            <div className="item" key={index}>
+              <img src={chair} alt="chair" />
+              <div className="intro">
+                <div className="title">GRIFFINS FURNITURE</div>
+                <div className="topic">Chair</div>
+                <div className="describe">
+                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minima, adipisci?
+                </div>
+                <button className='seeMore' ref={el => seeMoreButtonsRef.current[index] = el}>
+                  see more &#8599;
+                </button>
+              </div>
+              <div className="detail">
+                <div className="title">comfy chair</div>
+                <div className="describe">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis dignissimos atque quo expedita. Optio, consectetur ipsam fugiat illo, asperiores eaque repudiandae quaerat placeat amet cumque eveniet officia ratione sapiente delectus?
+                </div>
+                <div className="specification">
+                  <div>
+                    <p>used time</p>
+                    <p>NEW</p>
+                  </div>
+                  <div>
+                    <p>size</p>
+                    <p>1.5m x 1.5m</p>
+                  </div>
+                  <div>
+                    <p>compatible</p>
+                    <p>indoors</p>
+                  </div>
+                  <div>
+                    <p>price</p>
+                    <p>1000$</p>
+                  </div>
+                </div>
+                <div className="checkout">
+                  <button className='checkoutBtn'>ADD TO CART</button>
+                  <button className='checkoutBtn'>checkout</button>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
-        <div className="carousel" ref={carouselRef}>
-          <div className="list" ref={listRef}>
-            <div className="item">
-              <img src={Chair1} alt="chair" />
-              <div className="intro">
-                <div className="title">GRIFFINS FURNITURE</div>
-                <div className="topic">Chair</div>
-                <div className="describe">
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minima, adipisci?
-                </div>
-                <button className='seeMore' ref={el => seeMoreButtonsRef.current[0] = el}>
-                  see more &#8599;
-                </button>
-              </div>
-              <div className="detail">
-                <div className="title">comfy chair</div>
-                <div className="describe">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis dignissimos atque quo expedita. Optio, consectetur ipsam fugiat illo, asperiores eaque repudiandae quaerat placeat amet cumque eveniet officia ratione sapiente delectus?
-                </div>
-                <div className="specification">
-                  <div>
-                    <p>used time</p>
-                    <p>NEW</p>
-                  </div>
-                  <div>
-                    <p>size</p>
-                    <p>1.5m x 1.5m</p>
-                  </div>
-                  <div>
-                    <p>compatible</p>
-                    <p>indoors</p>
-                  </div>
-                  <div>
-                    <p>price</p>
-                    <p>1000$</p>
-                  </div>
-                </div>
-                <div className="checkout">
-                  <button className='checkoutBtn'>ADD TO CART</button>
-                  <button className='checkoutBtn'>checkout</button>
-                </div>
-              </div>
-            </div>
-            <div className="item">
-              <img src={Chair2} alt="chair" />
-              <div className="intro">
-                <div className="title">GRIFFINS FURNITURE</div>
-                <div className="topic">Chair</div>
-                <div className="describe">
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minima, adipisci?
-                </div>
-                <button className='seeMore' ref={el => seeMoreButtonsRef.current[1] = el}>
-                  see more &#8599;
-                </button>
-              </div>
-              <div className="detail">
-                <div className="title">comfy chair</div>
-                <div className="describe">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis dignissimos atque quo expedita. Optio, consectetur ipsam fugiat illo, asperiores eaque repudiandae quaerat placeat amet cumque eveniet officia ratione sapiente delectus?
-                </div>
-                <div className="specification">
-                  <div>
-                    <p>used time</p>
-                    <p>NEW</p>
-                  </div>
-                  <div>
-                    <p>size</p>
-                    <p>1.5m x 1.5m</p>
-                  </div>
-                  <div>
-                    <p>compatible</p>
-                    <p>indoors</p>
-                  </div>
-                  <div>
-                    <p>price</p>
-                    <p>1000$</p>
-                  </div>
-                </div>
-                <div className="checkout">
-                  <button className='checkoutBtn'>ADD TO CART</button>
-                  <button className='checkoutBtn'>checkout</button>
-                </div>
-              </div>
-            </div>
-            <div className="item">
-              <img src={Chair3} alt="chair" />
-              <div className="intro">
-                <div className="title">GRIFFINS FURNITURE</div>
-                <div className="topic">Chair</div>
-                <div className="describe">
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minima, adipisci?
-                </div>
-                <button className='seeMore' ref={el => seeMoreButtonsRef.current[2] = el}>
-                  see more &#8599;
-                </button>
-              </div>
-              <div className="detail">
-                <div className="title">comfy chair</div>
-                <div className="describe">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis dignissimos atque quo expedita. Optio, consectetur ipsam fugiat illo, asperiores eaque repudiandae quaerat placeat amet cumque eveniet officia ratione sapiente delectus?
-                </div>
-                <div className="specification">
-                  <div>
-                    <p>used time</p>
-                    <p>NEW</p>
-                  </div>
-                  <div>
-                    <p>size</p>
-                    <p>1.5m x 1.5m</p>
-                  </div>
-                  <div>
-                    <p>compatible</p>
-                    <p>indoors</p>
-                  </div>
-                  <div>
-                    <p>price</p>
-                    <p>1000$</p>
-                  </div>
-                </div>
-                <div className="checkout">
-                  <button className='checkoutBtn'>ADD TO CART</button>
-                  <button className='checkoutBtn'>checkout</button>
-                </div>
-              </div>
-            </div>
-            <div className="item">
-              <img src={Chair4} alt="chair" />
-              <div className="intro">
-                <div className="title">GRIFFINS FURNITURE</div>
-                <div className="topic">Chair</div>
-                <div className="describe">
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minima, adipisci?
-                </div>
-                <button className='seeMore' ref={el => seeMoreButtonsRef.current[3] = el}>
-                  see more &#8599;
-                </button>
-              </div>
-              <div className="detail">
-                <div className="title">comfy chair</div>
-                <div className="describe">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis dignissimos atque quo expedita. Optio, consectetur ipsam fugiat illo, asperiores eaque repudiandae quaerat placeat amet cumque eveniet officia ratione sapiente delectus?
-                </div>
-                <div className="specification">
-                  <div>
-                    <p>used time</p>
-                    <p>NEW</p>
-                  </div>
-                  <div>
-                    <p>size</p>
-                    <p>1.5m x 1.5m</p>
-                  </div>
-                  <div>
-                    <p>compatible</p>
-                    <p>indoors</p>
-                  </div>
-                  <div>
-                    <p>price</p>
-                    <p>1000$</p>
-                  </div>
-                </div>
-                <div className="checkout">
-                  <button className='checkoutBtn'>ADD TO CART</button>
-                  <button className='checkoutBtn'>checkout</button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="arrows">
-            <button id='prev' ref={prevButtonRef}><FaRegArrowAltCircleLeft /></button>
-            <button id='back' ref={backButtonRef}>go back &#8599; </button>
-            <button id='next' ref={nextButtonRef}><FaRegArrowAltCircleRight /></button>
-          </div>
+        <div className="arrows">
+          <button id='prev' ref={prevButtonRef}><FaRegArrowAltCircleLeft /></button>
+          <button id='back' ref={backButtonRef}>go back &#8599; </button>
+          <button id='next' ref={nextButtonRef}><FaRegArrowAltCircleRight /></button>
         </div>
-      </section>
-    </>
+      </div>
+    </section>
   );
 }
 

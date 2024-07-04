@@ -18,9 +18,6 @@ function Hero() {
     <div className="hero-section">
       <div className="upper-hero">
         <input type="text" placeholder="search" />
-        <button><Link to="/">Orders</Link></button>
-        <button><Link to="/">New</Link></button>
-        <button><Link to="/">Offers</Link></button>
       </div>
       <div className="middle-hero">
         <a href="#">furnitures</a>

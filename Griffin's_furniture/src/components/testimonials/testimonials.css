@@ -1,6 +1,6 @@
 :root {
-    --width: 100px;
-    --height: 100px;
+    --width: 150px;
+    --height: 150px;
     --quantity: 5; 
 }
 
@@ -8,12 +8,14 @@
     background-color: black;
     color: white;
     text-align: center;
-    height: 10vh;
+    height: auto;
+    padding-top: 5px; 
 }
 
 .testimonials {
+    margin-top: 20px;
     width: 100%;
-    height: 100px;
+    height: 150px;
     overflow: hidden; 
     mask-image: linear-gradient(
         to right,
@@ -21,6 +23,8 @@
         #000 10% 90%,
         transparent
     );
+    position: relative;
+    padding: 20px 0; 
 }
 
 .testimonials .lists {
@@ -35,6 +39,8 @@
     height: var(--height);
     position: absolute;
     animation: autoRun 10s linear infinite;
+    position: relative;
+    cursor: pointer;
 }
 
 .testimonials .lists .item img {
@@ -50,25 +56,59 @@
     }
 }
 
-#item1{
+#item1 {
     animation-delay: -10s; 
 }
 
 #item2 {
-    animation-delay: -8s;
+    animation-delay: -9s;
 }
 
 #item3 {
-    animation-delay: -6s;
+    animation-delay: -8s;
 }
 
 #item4 {
-    animation-delay: -4s;
+    animation-delay: -7s;
 }
 
 #item5 {
-    animation-delay: -2s;
+    animation-delay: -6s;
 }
-.testimonials:hover .item{
+
+.testimonials:hover .item {
     animation-play-state: paused !important;
 }
+
+.item {
+    position: relative;
+    margin: 0 10px;
+}
+
+.item img {
+    width: 100%;
+    height: auto;
+}
+
+.item::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #936e47;
+    color: rgb(0, 0, 0);
+    padding: 5px;
+    border-radius: 5px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+    z-index: 2;
+}
+
+.item:hover::after {
+    opacity: 1;
+    visibility: visible;
+}
+

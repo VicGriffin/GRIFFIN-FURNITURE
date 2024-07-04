@@ -9,7 +9,7 @@
 
 .upper-hero {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     gap: 2rem;
     padding: 2rem;
@@ -19,6 +19,7 @@
     width: 40%;
     padding: 10px;
     border-radius: 20px;
+
 }
 
 .upper-hero button {

@@ -1,66 +1,65 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './store.css';
-import S1_img from '../../assets/stores-img/billiani.jpeg'
-import S2_img from '../../assets/stores-img/kisumu.jpeg'
-import S3_img from '../../assets/stores-img/mombasa.jpeg'
-import S4_img from '../../assets/stores-img/mountke.jpeg'
-import S5_img from '../../assets/stores-img/nairobi.jpeg'
+import S1_img from '../../assets/stores-img/billiani.jpeg';
+import S2_img from '../../assets/stores-img/kisumu.jpeg';
+import S3_img from '../../assets/stores-img/mombasa.jpeg';
+import S4_img from '../../assets/stores-img/mountke.jpeg';
+import S5_img from '../../assets/stores-img/nairobi.jpeg';
 
 function Store() {
+  const [stores, setStores] = useState([
+    {
+      img: S2_img,
+      alt: "USA Store",
+      name: "USA Store",
+      description: "Griffins Furniture’s flagship store offers a wide variety of stylish and modern furniture for all tastes."
+    },
+    {
+      img: S1_img,
+      alt: "Billiani Store",
+      name: "Billiani Store",
+      description: "High-end, Italian-inspired pieces make Billiani a luxurious addition to Griffins Furniture’s portfolio."
+    },
+    {
+      img: S3_img,
+      alt: "Norway Store",
+      name: "Norway Store",
+      description: "Coastal-inspired designs, perfect for beachfront homes and tropical aesthetics, define the Mombasa branch."
+    },
+    {
+      img: S5_img,
+      alt: "New york Store",
+      name: "NEW YORK Store",
+      description: "Vibrant, colorful furniture pieces ideal for lakeside living and contemporary urban styles."
+    },
+    {
+      img: S4_img,
+      alt: "Kenya Store",
+      name: "Kenya Store",
+      description: "Eco-friendly, rustic furniture reflecting the natural beauty of the Kenya region."
+    }
+  ]);
+
   return (
-    <>
-      <div className='heading'>
-        <h1>Most Popular Stores in Kenya</h1>
+    <div className="store-container">
+      <div className='store-heading'>
+        <h3>Most Popular Stores in the world</h3>
       </div>
       <section className='card-name'>
-        <div className="card-section">
-          <div className="card-body">
-            <img src={S2_img} alt="Kisumu Store" />
-            <div className="info">
-              <h3>Kisumu Store</h3>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam enim delectus eligendi sit doloribus. Magni consequatur harum voluptate perferendis tempora necessitatibus aliquid. Eos natus corporis laudantium autem voluptates id eius?</p>
+        {stores.map((store, index) => (
+          <div className="card-section" key={index}>
+            <div className="card-body">
+              <img src={store.img} alt={store.alt} />
+              <div className="info">
+                <h3>{store.name}</h3>
+                <p>{store.description}</p>
+              </div>
             </div>
           </div>
-        </div>
-        <div className="card-section">
-          <div className="card-body">
-            <img src={S1_img} alt="Nakuru Store" />
-            <div className="info">
-              <h3>Billiani store</h3>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam enim delectus eligendi sit doloribus. Magni consequatur harum voluptate perferendis tempora necessitatibus aliquid. Eos natus corporis laudantium autem voluptates id eius?</p>
-            </div>
-          </div>
-        </div>
-        <div className="card-section">
-          <div className="card-body">
-            <img src={S3_img} alt="Mombasa Store" />
-            <div className="info">
-              <h3>Mombasa Store</h3>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam enim delectus eligendi sit doloribus. Magni consequatur harum voluptate perferendis tempora necessitatibus aliquid. Eos natus corporis laudantium autem voluptates id eius?</p>
-            </div>
-          </div>
-        </div>
-        <div className="card-section">
-          <div className="card-body">
-            <img src={S5_img} alt="Nairobi Store" />
-            <div className="info">
-              <h3>Nairobi Store</h3>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam enim delectus eligendi sit doloribus. Magni consequatur harum voluptate perferendis tempora necessitatibus aliquid. Eos natus corporis laudantium autem voluptates id eius?</p>
-            </div>
-          </div>
-        </div>
-        <div className="card-section">
-          <div className="card-body">
-            <img src={S4_img} alt="Mount Kenya Store" />
-            <div className="info">
-              <h3>Mount Kenya Store</h3>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam enim delectus eligendi sit doloribus. Magni consequatur harum voluptate perferendis tempora necessitatibus aliquid. Eos natus corporis laudantium autem voluptates id eius?</p>
-            </div>
-          </div>
-        </div>
+        ))}
       </section>
-    </>
+    </div>
   );
 }
 

@@ -27,6 +27,7 @@ footer .footer-right{
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+    text-align: center;
 }
 .footer-middle a{
     color: #fff;
@@ -40,4 +41,10 @@ footer .footer-right{
 .footer-right input{
     padding: 5px 10px;
     border-radius: 10px;
+}
+@media screen and (max-width:670px){
+    footer{
+        flex-direction: column;
+        }
+    
 }
