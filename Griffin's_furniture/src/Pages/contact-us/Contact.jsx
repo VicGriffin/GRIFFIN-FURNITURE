@@ -74,22 +74,22 @@ function Contact() {
             <form onSubmit={formik.handleSubmit}>
               <h3 className="titl">Contact us</h3>
               <div className="input-container">
-                <input type="text" name="name" className='input' onChange={formik.handleChange} value={formik.values.name} onBlur={formik.handleBlur} />
+                <input type="text" name="name" className='input' onChange={formik.handleChange} value={formik.values.name}  />
                 <label htmlFor="name">Your Name</label>
                 {formik.touched.name && formik.errors.name && <p>{formik.errors.name}</p>}
               </div>
               <div className="input-container">
-                <input type="email" name="email" className='input' onChange={formik.handleChange} value={formik.values.email} onBlur={formik.handleBlur} />
+                <input type="email" name="email" className='input' onChange={formik.handleChange} value={formik.values.email}  />
                 <label htmlFor="email">Your Email</label>
                 {formik.errors.email && <p>{formik.errors.email}</p>}
               </div>
               <div className="input-container">
-                <input type="phone" name="phone" className='input' onChange={formik.handleChange} value={formik.values.phone} onBlur={formik.handleBlur} />
+                <input type="phone" name="phone" className='input' onChange={formik.handleChange} value={formik.values.phone}  />
                 <label htmlFor="phone">Your Phone</label>
                 {formik.errors.phone && <p>{formik.errors.phone}</p>}
               </div>
               <div className="input-container text-area">
-                <textarea name="message" className='input' onChange={formik.handleChange} value={formik.values.message} onBlur={formik.handleBlur}></textarea>
+                <textarea name="message" className='input' onChange={formik.handleChange} value={formik.values.message} ></textarea>
                 <label htmlFor="message">Message</label>
               </div>
               <button type="submit" className="btn" disabled={loading}>

@@ -86,8 +86,8 @@ function What() {
             <div className="item" key={index}>
               <img src={chair} alt="chair" />
               <div className="intro">
-                <div className="title">GRIFFINS FURNITURE</div>
-                <div className="topic">Chair</div>
+                <div className="title">ON OFFER</div>
+                <div className="topic">Rocking Chair</div>
                 <div className="describe">
                   Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minima, adipisci?
                 </div>

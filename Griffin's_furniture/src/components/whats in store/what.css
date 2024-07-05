@@ -169,6 +169,7 @@
 .carousel .list .item .intro .title{
     font-size: 2em;
     line-height: 0.8em;
+    color: red;
 }
 
 .carousel .list .item .intro .topic{
@@ -304,6 +305,7 @@
 }
 .carousel.showDetail .list .item .detail .title{
     font-size: 4em;
+    color: #935e47;
 }
 .carousel.showDetail .list .item .detail .specification{
     display:  flex;
