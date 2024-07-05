@@ -24,7 +24,7 @@ function Footer() {
             <input type="text" placeholder="Enter your email" />
             <button>Subscribe</button>             
         </div>
-
+        
     </footer>
     </>
   )

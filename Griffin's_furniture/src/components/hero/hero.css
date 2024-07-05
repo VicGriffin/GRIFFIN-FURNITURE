@@ -22,12 +22,6 @@
 
 }
 
-.upper-hero button {
-    background-color: #eee4;
-    padding: 10px 30px;
-    border-radius: 20px;
-}
-
 .upper-hero a {
     color: white;
     background-color: transparent;
@@ -54,6 +48,9 @@
     color: white;
     margin-top: 2rem;
     gap: 2rem;
+}
+.lower-hero h1{
+    font-size: 3rem;
 }
 
 .lower-hero h2 {
@@ -105,5 +102,16 @@
     font-size: 0.9rem;
 }
 @media screen and (max-width:800px) {
-        
+    .middle-hero {
+        gap: 2rem;
+    }        
+}
+@media screen and (max-width:400px) {
+    .middle-hero {
+        gap: 10px;
+    }
+    .thumbnails{
+        opacity: 0;
+    }
+    
 }

@@ -54,6 +54,7 @@ function Store() {
               <div className="info">
                 <h3>{store.name}</h3>
                 <p>{store.description}</p>
+                <button><Link to="/Products">see more &#8599;</Link></button>
               </div>
             </div>
           </div>

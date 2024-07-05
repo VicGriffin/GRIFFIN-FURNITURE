@@ -3,7 +3,6 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    height: 80vh;
 }
 .store-heading h3{
     line-height: 2em;
@@ -30,7 +29,7 @@
 
 .card-section {
     width: 200px;
-    height: 200px;
+    height: 300px;
     position: relative;
     display: flex;
     justify-content: center;
@@ -76,7 +75,7 @@
 }
 
 .card-section:hover .info {
-    height: 50%;
+    height: 70%;
     opacity: 1;
     background-color: transparent;
 }
