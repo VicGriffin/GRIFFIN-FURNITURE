@@ -81,7 +81,7 @@ nav a:hover {
         background-color: #936e47;
         transition: transform 0.3s ease-in-out;
         transform: translateY(-100%);
-        z-index: 100;
+        z-index: 1001;
     }
 
     .header .responsive-nav {

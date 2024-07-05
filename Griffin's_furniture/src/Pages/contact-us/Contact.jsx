@@ -3,8 +3,32 @@ import './contact.css'
 import { IoMdMail } from "react-icons/io";
 import { FaPhoneVolume, FaLocationDot, FaXTwitter } from "react-icons/fa6";
 import { FaFacebook, FaInstagram, FaLinkedin } from "react-icons/fa";
+import {useFormik} from 'formik'
+import * as Yup from 'yup'
 
 function Contact() {
+  const validationSchema = Yup.object({
+    name: Yup.string("this field should contain string characters only")
+    .required("this field is required"),
+    email: Yup.string()
+    .email("invalid email format")
+    .required("This field is required"),
+    phone: Yup.number("invalid phone format")
+    .required("This field is required")
+  })
+  const formik = useFormik({
+    initialValues:{
+      name: '',
+      email: '',
+      phone: '',
+      message: ''
+    },
+    onSubmit: (formSubmission)=>{
+      console.log("here is what the user has submitted")
+      console.log(formSubmission)
+    },
+    validationSchema: validationSchema
+  })
   return (
     <>
       <div className="cont">
@@ -29,32 +53,36 @@ function Contact() {
             <div className="social-media">
               <p>connect with us:</p>
               <div className="btn-icon-section">
-                <button className='social-icon'><FaFacebook /></button>
-                <button className='social-icon'><FaXTwitter /></button>
-                <button className='social-icon'><FaInstagram /></button>
-                <button className='social-icon'><FaLinkedin /></button>
+                <button className='social-icon'><a href="https://www.facebook.com/victor.kamau.188/" target="_blank" ><FaFacebook /></a></button>
+                <button className='social-icon'><a href="https://x.com/victorkama83492" target='_blank'><FaXTwitter /></a></button>
+                <button className='social-icon'><a href="https://www.instagram.com/vic_griffin254/" target='_blank'><FaInstagram /></a></button>
+                <button className='social-icon'><a href="https://www.linkedin.com/in/victor-kamau-30b23720b/" target='_blank'><FaLinkedin /></a></button>
               </div>
             </div>
           </div>
           <div className="contact-form">
             <span className='circle one'></span>
             <span className='circle two'></span>
-            <form action="">
+            <form onSubmit={formik.handleSubmit}>
               <h3 className="titl">Contact us</h3>
               <div className="input-container">
-                <input type="text" name="name" className='input' placeholder=' ' />
+                <input type="text" name="name" className='input'  onChange={formik.handleChange} value={formik.values.name} onBlur={formik.handleBlur}/>
                 <label htmlFor="name">Your Name</label>
+                { formik.touched.name && formik.errors.name && <p>{formik.errors.name}</p>}
               </div>
               <div className="input-container">
-                <input type="email" name="email" className='input' placeholder=' ' />
+                <input type="email" name="email" className='input'onChange={formik.handleChange} value={formik.values.email} onBlur={formik.handleBlur}/>
                 <label htmlFor="email">Your Email</label>
+                {formik.errors.email && <p>{formik.errors.email}</p>}
               </div>
               <div className="input-container">
-                <input type="tel" name="phone" className='input' placeholder=' ' />
+                <input type="phone" name="phone" className='input'  onChange={formik.handleChange} value={formik.values.phone} onBlur={formik.handleBlur}/>
+                
                 <label htmlFor="phone">Your Phone</label>
+                {formik.errors.phone && <p>{formik.errors.phone}</p>}
               </div>
               <div className="input-container text-area">
-                <textarea name="message" className='input' placeholder=' ' ></textarea>
+                <textarea name="message" className='input' onChange={formik.handleChange} value={formik.values.message} onBlur={formik.handleBlur} ></textarea>
                 <label htmlFor="message">Message</label>
               </div>
               <button type="submit" className="btn">Send</button>
