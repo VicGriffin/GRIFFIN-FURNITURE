@@ -48,7 +48,7 @@
     top: 0;
     left: 0;
     width: 100%;
-    min-height: 70vh;
+    min-height: 100vh;
     background: rgba(0, 0, 0, 0.9);
     display: none;
     align-items: center;
@@ -58,7 +58,7 @@
     display: none;
     padding: 2rem;
     text-align: center;
-    background: #fff;
+    background: linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,.4));
     position: relative;
     margin: 2rem;
     width: 30rem;
@@ -96,7 +96,7 @@
     line-height: 1.5;
     padding: 1rem 0;
     font-size: 1rem;
-    color: #777;
+    color: #ffffff;
 }
 .product-preview .preview .price {
     padding: 1rem 0;
@@ -113,7 +113,7 @@
     flex: 1 1 16rem;
     padding: 1rem;
     font-size: 1.2rem;
-    color: #444;
+    color: #936e47;
 }
 .product-preview .preview .buttons a.cart {
     background-color: #444;

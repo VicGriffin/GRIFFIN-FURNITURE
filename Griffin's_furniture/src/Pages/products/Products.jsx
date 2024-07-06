@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './products.css';
 import { IoMdClose } from "react-icons/io";
 import r1_img from '../../assets/rocking-products/rocking1.jpeg';
@@ -10,169 +10,62 @@ import r6_img from '../../assets/rocking-products/rocking6.jpeg';
 import r7_img from '../../assets/rocking-products/rocking7.jpeg';
 import r8_img from '../../assets/rocking-products/rocking8.jpeg';
 
+const productData = [
+  { id: 'p-1', img: r1_img, name: 'rocking chair', price: '$20.00' },
+  { id: 'p-2', img: r2_img, name: 'rocking chair', price: '$20.00' },
+  { id: 'p-3', img: r3_img, name: 'rocking chair', price: '$20.00' },
+  { id: 'p-4', img: r4_img, name: 'rocking chair', price: '$20.00' },
+  { id: 'p-5', img: r5_img, name: 'rocking chair', price: '$20.00' },
+  { id: 'p-6', img: r6_img, name: 'rocking chair', price: '$20.00' },
+  { id: 'p-7', img: r7_img, name: 'rocking chair', price: '$20.00' },
+  { id: 'p-8', img: r8_img, name: 'rocking chair', price: '$20.00' },
+];
+
+function useProductPreview() {
+  const [activePreview, setActivePreview] = useState(null);
+
+  const openPreview = (id) => {
+    setActivePreview(id);
+  };
+
+  const closePreview = () => {
+    setActivePreview(null);
+  };
+
+  return { activePreview, openPreview, closePreview };
+}
+
 function Products() {
-  useEffect(() => {
-    const previewContainer = document.querySelector('.product-preview');
-    const previewBox = document.querySelectorAll('.preview');
-
-    document.querySelectorAll('.products-container .product').forEach(product => {
-      product.onclick = () => {
-        previewContainer.style.display = 'flex';
-        const name = product.getAttribute('data-name');
-        previewBox.forEach(preview => {
-          preview.classList.remove('active');  // Ensure all previews are inactive
-          const target = preview.getAttribute('data-target');
-          if (name === target) {
-            preview.classList.add('active');
-          }
-        });
-      };
-    });
-
-    previewBox.forEach(close => {
-      close.querySelector('.fa-times').onclick = () => {
-        close.classList.remove('active');
-        previewContainer.style.display = 'none';
-      };
-    });
-  }, []);
+  const { activePreview, openPreview, closePreview } = useProductPreview();
 
   return (
     <>
       <div className="products-container">
         <h3 className="title">Products</h3>
         <div className="product-container">
-          <div className="product" data-name="p-1">
-            <img src={r1_img} alt="Rocking Chair" />
-            <h3>rocking chair</h3>
-            <div className="price"><button>$20.00</button></div>
-          </div>
-          <div className="product" data-name="p-2">
-            <img src={r2_img} alt="Rocking Chair" />
-            <h3>rocking chair</h3>
-            <div className="price"><button>$20.00</button></div>
-          </div>
-          <div className="product" data-name="p-3">
-            <img src={r3_img} alt="Rocking Chair" />
-            <h3>rocking chair</h3>
-            <div className="price"><button>$20.00</button></div>
-          </div>
-          <div className="product" data-name="p-4">
-            <img src={r4_img} alt="Rocking Chair" />
-            <h3>rocking chair</h3>
-            <div className="price"><button>$20.00</button></div>
-          </div>
-          <div className="product" data-name="p-5">
-            <img src={r5_img} alt="Rocking Chair" />
-            <h3>rocking chair</h3>
-            <div className="price"><button>$20.00</button></div>
-          </div>
-          <div className="product" data-name="p-6">
-            <img src={r6_img} alt="Rocking Chair" />
-            <h3>rocking chair</h3>
-            <div className="price"><button>$20.00</button></div>
-          </div>
-          <div className="product" data-name="p-7">
-            <img src={r7_img} alt="Rocking Chair" />
-            <h3>rocking chair</h3>
-            <div className="price"><button>$20.00</button></div>
-          </div>
-          <div className="product" data-name="p-8">
-            <img src={r8_img} alt="Rocking Chair" />
-            <h3>rocking chair</h3>
-            <div className="price"><button>$20.00</button></div>
-          </div>
+          {productData.map((product) => (
+            <div className="product" data-name={product.id} key={product.id} onClick={() => openPreview(product.id)}>
+              <img src={product.img} alt={product.name} />
+              <h3>{product.name}</h3>
+              <div className="price"><button>{product.price}</button></div>
+            </div>
+          ))}
         </div>
       </div>
-      <div className="product-preview">
-        <div className="preview" data-target="p-1">
-          <button className="fas fa-times"><IoMdClose /></button>
-          <img src={r1_img} alt="Rocking Chair" />
-          <h3>rocking chair</h3>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis amet mollitia itaque neque iure ullam est delectus officia alias quaerat?</p>
-          <div className="price">$20.00</div>
-          <div className="buttons">
-            <a href="" className="buy">buy now</a>
-            <a href="" className="cart">add to cart</a>
+      <div className="product-preview" style={{ display: activePreview ? 'flex' : 'none' }}>
+        {productData.map((product) => (
+          <div className={`preview ${activePreview === product.id ? 'active' : ''}`} data-target={product.id} key={product.id}>
+            <button className="fas fa-times" onClick={closePreview}><IoMdClose /></button>
+            <img src={product.img} alt={product.name} />
+            <h3>{product.name}</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis amet mollitia itaque neque iure ullam est delectus officia alias quaerat?</p>
+            <div className="price">{product.price}</div>
+            <div className="buttons">
+              <a href="#" className="buy">buy now</a>
+              <a href="#" className="cart">add to cart</a>
+            </div>
           </div>
-        </div>
-        <div className="preview" data-target="p-2">
-          <button className="fas fa-times"><IoMdClose /></button>
-          <img src={r2_img} alt="Rocking Chair" />
-          <h3>rocking chair</h3>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis amet mollitia itaque neque iure ullam est delectus officia alias quaerat?</p>
-          <div className="price">$20.00</div>
-          <div className="buttons">
-            <a href="" className="buy">buy now</a>
-            <a href="" className="cart">add to cart</a>
-          </div>
-        </div>
-        <div className="preview" data-target="p-3">
-          <button className="fas fa-times"><IoMdClose /></button>
-          <img src={r3_img} alt="Rocking Chair" />
-          <h3>rocking chair</h3>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis amet mollitia itaque neque iure ullam est delectus officia alias quaerat?</p>
-          <div className="price">$20.00</div>
-          <div className="buttons">
-            <a href="" className="buy">buy now</a>
-            <a href="" className="cart">add to cart</a>
-          </div>
-        </div>
-        <div className="preview" data-target="p-4">
-          <button className="fas fa-times"><IoMdClose /></button>
-          <img src={r4_img} alt="Rocking Chair" />
-          <h3>rocking chair</h3>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis amet mollitia itaque neque iure ullam est delectus officia alias quaerat?</p>
-          <div className="price">$20.00</div>
-          <div className="buttons">
-            <a href="" className="buy">buy now</a>
-            <a href="" className="cart">add to cart</a>
-          </div>
-        </div>
-        <div className="preview" data-target="p-5">
-          <button className="fas fa-times"><IoMdClose /></button>
-          <img src={r5_img} alt="Rocking Chair" />
-          <h3>rocking chair</h3>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis amet mollitia itaque neque iure ullam est delectus officia alias quaerat?</p>
-          <div className="price">$20.00</div>
-          <div className="buttons">
-            <a href="" className="buy">buy now</a>
-            <a href="" className="cart">add to cart</a>
-          </div>
-        </div>
-        <div className="preview" data-target="p-6">
-          <button className="fas fa-times"><IoMdClose /></button>
-          <img src={r6_img} alt="Rocking Chair" />
-          <h3>rocking chair</h3>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis amet mollitia itaque neque iure ullam est delectus officia alias quaerat?</p>
-          <div className="price">$20.00</div>
-          <div className="buttons">
-            <a href="" className="buy">buy now</a>
-            <a href="" className="cart">add to cart</a>
-          </div>
-        </div>
-        <div className="preview" data-target="p-7">
-          <button className="fas fa-times"><IoMdClose /></button>
-          <img src={r7_img} alt="Rocking Chair" />
-          <h3>rocking chair</h3>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis amet mollitia itaque neque iure ullam est delectus officia alias quaerat?</p>
-          <div className="price">$20.00</div>
-          <div className="buttons">
-            <a href="" className="buy">buy now</a>
-            <a href="" className="cart">add to cart</a>
-          </div>
-        </div>
-        <div className="preview" data-target="p-8">
-          <button className="fas fa-times"><IoMdClose /></button>
-          <img src={r8_img} alt="Rocking Chair" />
-          <h3>rocking chair</h3>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis amet mollitia itaque neque iure ullam est delectus officia alias quaerat?</p>
-          <div className="price">$20.00</div>
-          <div className="buttons">
-            <a href="" className="buy">buy now</a>
-            <a href="" className="cart">add to cart</a>
-          </div>
-        </div>
+        ))}
       </div>
     </>
   );
