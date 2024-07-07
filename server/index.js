@@ -1,7 +1,7 @@
 import express from 'express';
 import { config } from 'dotenv';
 import cors from 'cors';
-import userRouter from './routes/user.routes.js';  // Assuming you have this file
+import usersRouter from './routes/user.routes.js';  // Assuming you have this file
 
 config();
 const app = express();
@@ -17,7 +17,7 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use("/user", userRouter);
+app.use("/users", usersRouter);
 
 app.use((err, req, res, next) => {
     console.error('Unhandled error:', err.stack);
