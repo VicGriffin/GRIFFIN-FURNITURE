@@ -1,6 +1,7 @@
-import express from "express";
-const server = express();
+import express from 'express'
 
-app.listen(3002, () =>{
-    console.log("Server is running on port 3002");
+const app = express();
+
+app.listen(3001, (req,res) =>{
+    console.log('server is running on port 3001....');
 })
