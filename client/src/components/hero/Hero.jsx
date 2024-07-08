@@ -19,12 +19,48 @@ function Hero() {
       <div className="upper-hero">
         <input type="text" placeholder="search" />
       </div>
-      <div className="middle-hero">
-        <a href="#">furnitures</a>
-        <a href="#">indoor</a>
-        <a href="#">outdoors</a>
-        <a href="#">kitchen</a>
-        <a href="#">more</a>
+      <div className="middle-hero dropdown">
+      <div className="dropdown">
+        <button><a href="#">furnitures</a></button>
+          <div className="dropdown-menu">
+            <a href="#">Tables</a>
+            <a href="#">desks</a>
+            <a href="#">closet storage</a>
+            <a href="#">towers</a>
+          </div>
+        </div> <div className="dropdown">
+        <button><a href="#">indoors</a></button>
+          <div className="dropdown-menu">
+            <a href="#">sofas</a>
+            <a href="#">recliners</a>
+            <a href="#">endtables</a>
+            <a href="#">tv stand</a>
+          </div>
+        </div> <div className="dropdown">
+        <button><a href="#">outdoors</a></button>
+          <div className="dropdown-menu">
+            <a href="#">outdoor benches</a>
+            <a href="#">outdoor chairset</a>
+            <a href="#">outdoor convo set</a>
+            <a href="#">patio umbrela</a>
+          </div>
+        </div> <div className="dropdown">
+        <button><a href="#">dinning</a></button>
+          <div className="dropdown-menu">
+            <a href="#">dinning room collection</a>
+            <a href="#">dinning room set</a>
+            <a href="#">dinning room chairs</a>
+            <a href="#">dinning room tables</a>
+          </div>
+        </div> <div className="dropdown">
+        <button><a href="#">more</a></button>
+          <div className="dropdown-menu">
+            <a href="#">shop by style</a>
+            <a href="#">new arrivals</a>
+            <a href="#">home ideas</a>
+            <a href="#">exclusively at griffins</a>
+          </div>
+        </div>
       </div>
       <div className="lower-hero">
         <h1>GRIFFINS</h1>

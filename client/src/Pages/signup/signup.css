@@ -33,6 +33,7 @@
   background-color: #28a745;
   color: white;
   cursor: pointer;
+  width: 100px;
 }
 
 .signup-button:hover {
