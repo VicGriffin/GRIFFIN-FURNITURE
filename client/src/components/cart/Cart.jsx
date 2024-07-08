@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import './cart.css';
@@ -8,6 +8,23 @@ const Cart = ({ products = [] }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
+  useEffect(() => {
+    const fetchCartItems = async () => {
+      try {
+        const response = await fetch('http://localhost:3001/cart');
+        if (!response.ok) {
+          throw new Error('Failed to fetch cart items');
+        }
+        const data = await response.json();
+        setCartItems(data);
+      } catch (error) {
+        setError(error.message);
+      }
+    };
+
+    fetchCartItems();
+  }, []);
+
   const validationSchema = Yup.object({
     quantity: Yup.number().min(1, 'Must be at least 1').required('Required'),
   });
@@ -16,15 +33,23 @@ const Cart = ({ products = [] }) => {
     setLoading(true);
     setError('');
     try {
-      const selectedProduct = products.find(product => product.id === values.productId);
-      const item = {
-        ...selectedProduct,
-        quantity: values.quantity,
-      };
-      setCartItems([...cartItems, item]);
+      const response = await fetch('http://localhost:3001/cart', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(values),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to add product to cart');
+      }
+
+      const data = await response.json();
+      setCartItems([...cartItems, data.cartItem]);
       alert('Product added to cart!');
     } catch (error) {
-      setError('Failed to add product to cart');
+      setError(error.message);
     } finally {
       setLoading(false);
     }

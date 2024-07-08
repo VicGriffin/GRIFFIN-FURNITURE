@@ -32,17 +32,18 @@ model Subscribe {
 
 
 model Product {
-  id    String @id @default(uuid())
-  name  String
-  price Float
-  img   String
+  id        String      @id @default(uuid())
+  name      String
+  price     Float
+  img       String
+  cartItems CartItem[]
 }
 
-model Cart {
+model CartItem {
   id        String  @id @default(uuid())
   product   Product @relation(fields: [productId], references: [id])
   productId String
   quantity  Int
 
-  @@map("Cart")
+  @@index([productId], name: "productId")
 }

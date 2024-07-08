@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './products.css';
 import { IoMdClose } from 'react-icons/io';
@@ -36,17 +36,42 @@ function useProductPreview() {
   return { activePreview, openPreview, closePreview };
 }
 
-const Products = ({ setProducts }) => {
+const Products = () => {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
   const { activePreview, openPreview, closePreview } = useProductPreview();
 
-  useEffect(() => {
-    setProducts(productData);
-  }, [setProducts]);
+  const handleAddToCart = async (productId, quantity = 1) => {
+    setLoading(true);
+    setError('');
+    try {
+      const response = await fetch('http://localhost:3001/cart', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ productId, quantity }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to add product to cart');
+      }
+
+      const data = await response.json();
+      alert('Product added to cart!');
+    } catch (error) {
+      console.error(error);
+      setError('Failed to add product to cart');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <>
       <div className="products-container">
         <h3 className="title">Products</h3>
+        {error && <p className="error">{error}</p>}
         <div className="product-container">
           {productData.map((product) => (
             <div className="product" data-name={product.id} key={product.id} onClick={() => openPreview(product.id)}>
@@ -67,13 +92,15 @@ const Products = ({ setProducts }) => {
             <div className="price">${product.price}</div>
             <div className="buttons">
               <Link to="/cart" className="buy">buy now</Link>
-              <Link to="/cart" className="cart">add to cart</Link>
+              <button className="cart" onClick={() => handleAddToCart(product.id)} disabled={loading}>
+                {loading ? 'Adding to Cart...' : 'Add to Cart'}
+              </button>
             </div>
           </div>
         ))}
       </div>
     </>
   );
-}
+};
 
 export default Products;
