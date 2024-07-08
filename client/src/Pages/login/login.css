@@ -13,6 +13,9 @@
 .login-container h2{
     text-align: center;
 }
+form p{
+  line-height: 1.5;
+}
 
 .login-form {
   display: flex;

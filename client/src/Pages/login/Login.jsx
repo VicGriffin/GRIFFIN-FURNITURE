@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { useNavigate, Link } from 'react-router-dom';
+import { useFormik, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import './login.css';
 
@@ -8,20 +8,15 @@ const Login = () => {
   const navigate = useNavigate();
   const [error, setError] = useState('');
 
-  const initialValues = {
-    email: '',
-    password: '',
-  };
-
-  const validationSchema = Yup.object({
-    email: Yup.string().email('Invalid email format').required('Required'),
-    password: Yup.string().required('Required'),
+ const validationSchema = Yup.object({
+    Email: Yup.string().email('Invalid email format').required('Required'),
+    Password: Yup.string().required('Required'),
   });
 
   const handleSubmit = async (values) => {
     setError('');
     try {
-      const response = await fetch('http://localhost:3001/user/login', {
+      const response = await fetch('http://localhost:3001/users/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -38,43 +33,58 @@ const Login = () => {
       setError(error.message);
     }
   };
+  
+  const formik =useFormik({
+    initialValues :{
+    Email: '',
+    Password: ''
+
+  },
+  validationSchema : validationSchema,
+  onSubmit : handleSubmit
+}) 
+  
 
   return (
     <section className='log-in'>
       <div className="login-container">
         <h2>Login</h2>
-        <Formik
-          initialValues={initialValues}
-          validationSchema={validationSchema}
-          onSubmit={handleSubmit}
-        >
-          {({ isSubmitting }) => (
-            <Form className="login-form">
+            <form className="login-form" onSubmit={formik.handleSubmit}>
               <div className="form-group">
-                <Field
+                <input
                   type="email"
-                  name="email"
+                  name="Email"
+                  value={formik.values.Email}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
                   placeholder="Email"
                   className="login-input"
                 />
-                <ErrorMessage name="email" component="div" className="error" />
+                {formik.touched.Email && formik.errors.Email && (
+                  <p className="error">{formik.errors.Email}</p>
+                )}
               </div>
               <div className="form-group">
-                <Field
+                <input
                   type="password"
-                  name="password"
+                  name="Password"
+                  value={formik.values.Password}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
                   placeholder="Password"
                   className="login-input"
                 />
-                <ErrorMessage name="password" component="div" className="error" />
+                {formik.touched.Password && formik.errors.Password && (
+              <p className="error">{formik.errors.Password}</p>
+            )}
               </div>
-              <button type="submit" className="login-button" disabled={isSubmitting}>
+              <button type="submit" className="login-button" >
                 Login
               </button>
-              {error && <div className="error">{error}</div>}
-            </Form>
-          )}
-        </Formik>
+              {error && <div className="error"><p>failed to login</p></div>}
+             <p>Dont have an account<Link to="/Signup" >Signup</Link></p> 
+              
+            </form>
       </div>
     </section>
   );
