@@ -3,6 +3,7 @@ import './contact.css';
 import { IoMdMail } from "react-icons/io";
 import { FaPhoneVolume, FaLocationDot, FaXTwitter } from "react-icons/fa6";
 import { FaFacebook, FaInstagram, FaLinkedin } from "react-icons/fa";
+import { RiNewsLine } from "react-icons/ri";
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
@@ -65,6 +66,8 @@ function Contact() {
                 <button className='social-icon'><a href="https://x.com/victorkama83492" target='_blank'><FaXTwitter /></a></button>
                 <button className='social-icon'><a href="https://www.instagram.com/vic_griffin254/" target='_blank'><FaInstagram /></a></button>
                 <button className='social-icon'><a href="https://www.linkedin.com/in/victor-kamau-30b23720b/" target='_blank'><FaLinkedin /></a></button>
+                <button className='social-icon'>
+                <a href="https://www.flipsnack.com/CA78AADD75E/griffins-furniture-magazine/full-view.html" target='_blank'><RiNewsLine/></a></button>
               </div>
             </div>
           </div>

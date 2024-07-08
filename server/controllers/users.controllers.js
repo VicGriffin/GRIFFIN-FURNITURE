@@ -7,10 +7,6 @@ export const createUsersRoute = async (req, res) => {
         const { FirstName, SecondName, Email, PhoneNumber, Password } = req.body;
         const hashedPassword = await bcrypt.hash(Password, 10);
 
-        // if (!FirstName || !SecondName || !Email || !PhoneNumber || !Password) {
-        //     return res.status(400).json({ success: false, message: 'All fields are required' });
-        // }
-
         const newUser = await prisma.user.create({
             data: {
                 FirstName: FirstName,

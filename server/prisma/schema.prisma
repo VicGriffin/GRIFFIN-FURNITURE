@@ -24,7 +24,25 @@ model User {
   @@map("users")
 }
 
-model product {
-  id          String   @id @default(uuid())
-  
+model Subscribe {
+  id        Int    @id @default(autoincrement())
+  Email     String @unique
+  createdAt DateTime @default(now())
+}
+
+
+model Product {
+  id    String @id @default(uuid())
+  name  String
+  price Float
+  img   String
+}
+
+model Cart {
+  id        String  @id @default(uuid())
+  product   Product @relation(fields: [productId], references: [id])
+  productId String
+  quantity  Int
+
+  @@map("Cart")
 }

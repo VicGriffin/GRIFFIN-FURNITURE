@@ -6,6 +6,7 @@ import './login.css';
 
 const Login = () => {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
  const validationSchema = Yup.object({
@@ -78,8 +79,8 @@ const Login = () => {
               <p className="error">{formik.errors.Password}</p>
             )}
               </div>
-              <button type="submit" className="login-button" >
-                Login
+              <button type="submit" className="login-button" disabled={loading}>
+              {loading ? 'Loading...' : 'Login'}
               </button>
               {error && <div className="error"><p>failed to login</p></div>}
              <p>Dont have an account<Link to="/Signup" >Signup</Link></p> 

@@ -1,5 +1,5 @@
 .log-in{
-    background: linear-gradient(rgba(0,0,0,.4),rgba(0,0,0,0.9));
+  background: linear-gradient(rgb(147, 110, 71),rgba(0,0,0,0.9));
     display: grid;
     place-content: center;
 }
