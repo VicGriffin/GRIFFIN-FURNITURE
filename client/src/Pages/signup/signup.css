@@ -39,3 +39,11 @@
 .signup-button:hover {
   background-color: #218838;
 }
+.butt{
+  display: flex;
+  justify-content: space-between;
+  
+}
+.butt a{
+  text-decoration: none;
+}

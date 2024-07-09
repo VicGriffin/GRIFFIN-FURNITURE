@@ -3,34 +3,38 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import './login.css';
-import { ToastContainer, toast, Bounce } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useAuth } from '../../authContext.jsx';
 
 const Login = () => {
+  const { login } = useAuth(); 
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const notifySuccess = () => toast.success('🦄 signin successful!', {
-    position: "bottom-center",
-    autoClose: 5000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-    theme: "dark",
-    transition: Bounce,
+
+  const notifySuccess = () =>
+    toast.success('🦄 Signin successful!', {
+      position: 'top-right',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'dark',
     });
-  const notifyError = (message) => toast.error('🦄 invalid email or password!', {
-    position: "bottom-center",
-    autoClose: 5000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-    theme: "dark",
-    transition: Bounce,
+
+  const notifyError = (message) =>
+    toast.error('🦄 Invalid email or password!', {
+      position: 'top-right',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'dark',
     });
 
   const validationSchema = Yup.object({
@@ -51,6 +55,8 @@ const Login = () => {
       });
       setLoading(false);
       if (response.ok) {
+        const userData = await response.json();
+        login(userData); // Set user data in AuthContext
         notifySuccess();
         navigate('/');
       } else {
@@ -69,50 +75,55 @@ const Login = () => {
   const formik = useFormik({
     initialValues: {
       Email: '',
-      Password: ''
+      Password: '',
     },
     validationSchema: validationSchema,
-    onSubmit: handleSubmit
+    onSubmit: handleSubmit,
   });
 
   return (
     <section className='log-in'>
-      <div className="login-container">
-        <h2>Login</h2>
-        <form className="login-form" onSubmit={formik.handleSubmit}>
-          <div className="form-group">
+      <div className='login-container'>
+        <form className='login-form' onSubmit={formik.handleSubmit}>
+          <div className='form-group'>
+            <h2>WELCOME BACK</h2>
             <input
-              type="email"
-              name="Email"
+              type='email'
+              name='Email'
               value={formik.values.Email}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              placeholder="Email"
-              className="login-input"
+              placeholder='Email'
+              className='login-input'
             />
             {formik.touched.Email && formik.errors.Email && (
-              <p className="error">{formik.errors.Email}</p>
+              <p className='error'>{formik.errors.Email}</p>
             )}
           </div>
-          <div className="form-group">
+          <div className='form-group'>
             <input
-              type="password"
-              name="Password"
+              type='password'
+              name='Password'
               value={formik.values.Password}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              placeholder="Password"
-              className="login-input"
+              placeholder='Password'
+              className='login-input'
             />
             {formik.touched.Password && formik.errors.Password && (
-              <p className="error">{formik.errors.Password}</p>
+              <p className='error'>{formik.errors.Password}</p>
             )}
           </div>
-          <button type="submit" className="login-button" disabled={loading}>
-            {loading ? 'Loading...' : 'Login'}
-          </button>
-          {error && <div className="error"><p>{error}</p></div>}
-          <p>Don't have an account? <Link to="/Signup">Signup</Link></p>
+          <div className='butt'>
+            <button type='submit' className='login-button' disabled={loading}>
+              {loading ? 'Loading...' : 'Login'}
+            </button>
+            <button type='button' className='login-button'>
+              <Link to='/Signup'>Signup</Link>
+            </button>
+          </div>
+          
+          {error && <div className='error'><p>{error}</p></div>}
         </form>
       </div>
       <ToastContainer />

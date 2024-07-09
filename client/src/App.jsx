@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useState } from 'react';
-import './App.css';
+import { AuthProvider } from './authContext';
 import Header from './components/header/Header.jsx';
 import Home from './Pages/home/Home.jsx';
 import Products from './Pages/products/Products.jsx';
@@ -15,7 +15,7 @@ function App() {
   const [products, setProducts] = useState([]);
 
   return (
-    <>
+    <AuthProvider> 
       <BrowserRouter>
         <Header />
         <Routes>
@@ -29,7 +29,7 @@ function App() {
         </Routes>
         <Footer />
       </BrowserRouter>
-    </>
+    </AuthProvider>
   );
 }
 

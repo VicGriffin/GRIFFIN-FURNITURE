@@ -3,7 +3,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import './cart.css';
 import { ToastContainer, toast } from 'react-toastify';
-  import 'react-toastify/dist/ReactToastify.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Cart = ({ products = [] }) => {
   const [cartItems, setCartItems] = useState([]);
@@ -49,9 +49,10 @@ const Cart = ({ products = [] }) => {
 
       const data = await response.json();
       setCartItems([...cartItems, data.cartItem]);
-      alert('Product added to cart!');
+      toast.success('Product added to cart!');
     } catch (error) {
       setError(error.message);
+      toast.error('Failed to add product to cart');
     } finally {
       setLoading(false);
     }
@@ -130,6 +131,7 @@ const Cart = ({ products = [] }) => {
           </ul>
         )}
       </div>
+      <ToastContainer />
     </section>
   );
 };

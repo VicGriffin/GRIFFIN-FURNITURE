@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate , Link } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import './signup.css';
@@ -91,9 +91,9 @@ const Signup = () => {
   return (
     <section className="sign-up">
       <div className="signup-container">
-        <h2>Signup</h2>
         <form className="signup-form" onSubmit={formik.handleSubmit}>
           <div className="form-group">
+          <h2>CREATE AN ACCOUNT</h2>
             <input
               type="text"
               name="FirstName"
@@ -176,10 +176,14 @@ const Signup = () => {
             {formik.touched.confirmPassword && formik.errors.confirmPassword && (
               <p className="error">{formik.errors.confirmPassword}</p>
             )}
-          </div>
-          <button type="submit" className="signup-button" disabled={loading}>
+            <div className="butt">           
+            <button type="submit" className="signup-button " disabled={loading}>
             {loading ? 'Loading...' : 'Create Account'}
           </button>
+          <button type='button' className='signup-button'> <Link to="/login">login</Link></button>
+          
+            </div>
+            </div>          
           <ToastContainer />
         </form>
       </div>
