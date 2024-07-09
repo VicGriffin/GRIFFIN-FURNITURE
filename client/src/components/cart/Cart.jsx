@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import './cart.css';
+import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 
 const Cart = ({ products = [] }) => {
   const [cartItems, setCartItems] = useState([]);
@@ -121,7 +123,7 @@ const Cart = ({ products = [] }) => {
             {cartItems.map((item, index) => (
               <li key={index}>
                 <div>
-                  <strong>{item.name}</strong> - Quantity: {item.quantity}, Total: ${item.price * item.quantity}
+                  <strong>{item.product.name}</strong> - Quantity: {item.quantity}, Total: ${item.product.price * item.quantity}
                 </div>
               </li>
             ))}

@@ -1,4 +1,3 @@
-// routes/cartRoutes.js
 import { Router } from 'express';
 import { getAllCartItems, addItemToCart } from '../controllers/cart.controllers.js';
 

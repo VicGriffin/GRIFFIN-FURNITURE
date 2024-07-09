@@ -1,3 +1,4 @@
+// products.controllers.js
 import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
@@ -23,10 +24,10 @@ export const createProduct = async (req, res) => {
         img,
       },
     });
-    res.status(200).json({ message: 'new product created', newProduct: newProduct });
-    } catch (error) {
-        res.status(500).json({ message: 'Internal Server Error', error: error.message });
-    }finally {
-        await prisma.$disconnect()
-    }
-}
+    res.status(200).json({ message: 'new product created', newProduct });
+  } catch (error) {
+    res.status(500).json({ message: 'Internal Server Error', error: error.message });
+  } finally {
+    await prisma.$disconnect();
+  }
+};

@@ -1,14 +1,20 @@
+// cart.controllers.js
 import { PrismaClient } from '@prisma/client';
-
 const prisma = new PrismaClient();
 
 export const getAllCartItems = async (req, res) => {
   try {
-    const cartItems = await prisma.cartItem.findMany();
+    const cartItems = await prisma.cartItem.findMany({
+      include: {
+        product: true, // Include product details
+      },
+    });
     res.json(cartItems);
   } catch (error) {
     console.error('Error retrieving cart items:', error);
     res.status(500).json({ error: 'Internal server error' });
+  } finally {
+    await prisma.$disconnect();
   }
 };
 
@@ -31,10 +37,10 @@ export const addItemToCart = async (req, res) => {
       },
     });
 
-    res.status(200).json({ message: 'added to cart', cartItem:cartItem });
-    } catch (error) {
-        res.status(500).json({ message: 'Internal Server Error', error: error.message });
-    }finally {
-        await prisma.$disconnect()
-    }
+    res.status(200).json({ message: 'added to cart', cartItem });
+  } catch (error) {
+    res.status(500).json({ message: 'Internal Server Error', error: error.message });
+  } finally {
+    await prisma.$disconnect();
+  }
 };

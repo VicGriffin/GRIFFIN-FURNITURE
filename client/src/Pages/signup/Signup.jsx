@@ -3,11 +3,35 @@ import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import './signup.css';
+import { ToastContainer, toast , Bounce} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Signup = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const notifySuccess = () => toast.success('🦄 signed up successfull', {
+    position: "bottom-center",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "dark",
+    transition: Bounce,
+    });
+  const notifyError = (message) => toast.error('🦄 invalid details!', {
+    position: "bottom-center",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "dark",
+    transition: Bounce,
+    });
 
   const validationSchema = Yup.object({
     FirstName: Yup.string().required('Required'),
@@ -21,7 +45,7 @@ const Signup = () => {
     confirmPassword: Yup.string()
       .oneOf([Yup.ref('Password'), null], 'Passwords must match')
       .required('Required'),
-  })
+  });
 
   const handleSubmit = async (values) => {
     setLoading(true);
@@ -36,13 +60,16 @@ const Signup = () => {
       });
       const data = await response.json();
       if (data.message === "signup success") {
-        alert("Signed up successfully");
+        notifySuccess();
         navigate('/Login');
       } else {
-        setError(data.message || 'Registration failed');
+        const errorMessage = data.message || 'Registration failed';
+        setError(errorMessage);
+        notifyError(errorMessage);
       }
     } catch (error) {
       setError(error.message);
+      notifyError(error.message);
     } finally {
       setLoading(false);
     }
@@ -57,8 +84,7 @@ const Signup = () => {
       Password: '',
       confirmPassword: '',
     },
-    
-    validationSchema :validationSchema,
+    validationSchema: validationSchema,
     onSubmit: handleSubmit,
   });
 
@@ -154,11 +180,7 @@ const Signup = () => {
           <button type="submit" className="signup-button" disabled={loading}>
             {loading ? 'Loading...' : 'Create Account'}
           </button>
-          {error && (
-            <div className="error">
-              <p>{error}</p>
-            </div>
-          )}
+          <ToastContainer />
         </form>
       </div>
     </section>
