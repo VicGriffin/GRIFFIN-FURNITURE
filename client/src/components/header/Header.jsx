@@ -25,21 +25,21 @@ function Header() {
       </div>
       <nav ref={navRef}>
         <ul>
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/Products">Products</Link></li>
-          <li><Link to="/Store">Store</Link></li>
-          <li><Link to="/Contact">Contact Us</Link></li>
-          {user ? (
+        {user ? (
             <>
-              <li>Welcome, {user.FirstName}</li> 
+              <li>WELCOME</li>
+              <li><Link to="/">Home</Link></li>
+              <li><Link to="/Cart"><FaShoppingCart/></Link></li>              
+              <li><Link to="/Products">Products</Link></li>
+              <li><Link to="/Store">Store</Link></li>
               <li><button onClick={handleLogout}>Logout</button></li> 
-              <li><Link to="/Cart"><FaShoppingCart/></Link></li>
             </>
           ) : (
             <>
               <li><Link to="/Login"><CiLogin/></Link></li>
             </>
           )}
+          <li><Link to="/Contact">Contact Us</Link></li>
           <button onClick={showNavbar} className='nav-btn nav-close-btn'>
             <FaTimes />
           </button>

@@ -56,7 +56,7 @@ const Login = () => {
       setLoading(false);
       if (response.ok) {
         const userData = await response.json();
-        login(userData); // Set user data in AuthContext
+        login(userData); 
         notifySuccess();
         navigate('/');
       } else {

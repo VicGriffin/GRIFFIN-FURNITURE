@@ -14,7 +14,7 @@ const app = express();
 
 app.use(cors({
   origin: 'http://localhost:5173',
-  methods: 'POST, PATCH, GET',
+  methods: 'POST, PATCH, GET, DELETE',
 }));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
