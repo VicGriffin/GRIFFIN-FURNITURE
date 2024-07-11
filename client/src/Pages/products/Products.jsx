@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './products.css';
 import { IoMdClose } from 'react-icons/io';
 
@@ -22,6 +22,7 @@ const Products = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const { activePreview, openPreview, closePreview } = useProductPreview();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -45,30 +46,17 @@ const Products = () => {
     fetchProducts();
   }, []);
 
-  const handleAddToCart = async (productId, quantity = 1) => {
-    setLoading(true);
-    setError('');
-    try {
-      const response = await fetch(`http://localhost:3001/cart`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
+  const handleAddToCart = (product) => {
+    navigate('/Cart', {
+      state: {
+        product: {
+          id: product.id,
+          img: product.image,
+          name: product.name,
+          price: product.price,
         },
-        body: JSON.stringify({ productId, quantity }),
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to add product to cart');
-      }
-
-      const data = await response.json();
-      alert('Product added to cart!');
-    } catch (error) {
-      console.error(error);
-      setError('Failed to add product to cart');
-    } finally {
-      setLoading(false);
-    }
+      },
+    });
   };
 
   return (
@@ -78,10 +66,14 @@ const Products = () => {
         {error && <p className="error">{error}</p>}
         <div className="product-container">
           {products.map((product) => (
-            <div className="product" data-name={product.id} key={product.id} onClick={() => openPreview(product.id)}>
+            <div className="product"
+              data-name={product.id}
+              key={product.id} onClick={() => openPreview(product.id)}>
               <img src={product.image} alt={product.name} />
               <h3>{product.name}</h3>
-              <div className="price"><button>${product.price}</button></div>
+              <div className="price">
+                <button>${product.price}</button>
+              </div>
             </div>
           ))}
         </div>
@@ -96,7 +88,7 @@ const Products = () => {
             <div className="price">${product.price}</div>
             <div className="buttons">
               <Link to="/cart" className="buy">buy</Link>
-              <button className="cart" onClick={() => handleAddToCart(product.id)} disabled={loading}>
+              <button className="cart" onClick={() => handleAddToCart(product)} disabled={loading}>
                 {loading ? 'Adding to Cart...' : 'Add to Cart'}
               </button>
             </div>

@@ -10,6 +10,7 @@ import Footer from './components/footer/Footer.jsx';
 import Login from './Pages/login/Login.jsx';
 import Signup from './Pages/signup/Signup.jsx';
 import Cart from './components/cart/Cart.jsx';
+import Cloudinary from './Pages/cloudinary/cloudinary.jsx';
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -26,6 +27,7 @@ function App() {
           <Route path="/login" element={<Login />} /> 
           <Route path="/signup" element={<Signup />} /> 
           <Route path="/cart" element={<Cart products={products} />} />
+          <Route path="/cloudinary" element={<Cloudinary />} />
         </Routes>
         <Footer />
       </BrowserRouter>
